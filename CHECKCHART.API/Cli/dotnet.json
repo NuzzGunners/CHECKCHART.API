@@ -1,0 +1,1 @@
+﻿//dotnet ef dbcontext scaffold "Server=srh_nuzz\sqlserver;Database=CheckChartDb;user id=sa;password=P@ssw0rd;" Microsoft.EntityFrameworkCore.SqlServer -f -o Models
