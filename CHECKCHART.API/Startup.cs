@@ -57,6 +57,7 @@ namespace CHECKCHART.API
             services.AddScoped<IAuditRepository, AuditRepository>();
             services.AddScoped<IAuditCategoryRepository, AuditCategoryRepository>();
             services.AddScoped<ICheckchartLogRepository, CheckchartlogRepository>();
+            services.AddScoped<IViewAuditRepository, ViewAuditRepository>();
 
             services.AddMvc()
                 .AddJsonOptions(opts => 

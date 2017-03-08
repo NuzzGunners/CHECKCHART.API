@@ -15,4 +15,5 @@ namespace CHECKCHART.API.Abstract
     public interface IAuditRepository : IEntityBaseRepository<Audit> { }
     public interface IAuditCategoryRepository : IEntityBaseRepository<AuditCategory> { }
     public interface ICheckchartLogRepository : IEntityBaseRepository<V_CheckchartLog> { }
+    public interface IViewAuditRepository : IEntityBaseRepository<V_Audit> { }
 }

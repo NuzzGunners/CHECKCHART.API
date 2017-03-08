@@ -16,6 +16,7 @@ namespace CHECKCHART.API.Models
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Userposition> Userposition { get; set; }
         public virtual DbSet<V_CheckchartLog> V_CheckchartLog { get; set; }
+        public virtual DbSet<V_Audit> V_Audit { get; set; }
 
         public CheckChartDbContext(DbContextOptions options) : base(options) { }
 
