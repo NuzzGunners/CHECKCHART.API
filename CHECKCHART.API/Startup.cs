@@ -63,7 +63,12 @@ namespace CHECKCHART.API
                 .AddJsonOptions(opts => 
                 {
                     opts.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                });         
+                });
+
+            services.AddSignalR(options =>
+            {
+                options.Hubs.EnableDetailedErrors = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
@@ -74,7 +79,11 @@ namespace CHECKCHART.API
             app.UseCors(builder =>
                 builder.AllowAnyOrigin()
                 .AllowAnyHeader()
-                .AllowAnyMethod());
+                .AllowAnyMethod()
+                .AllowCredentials());
+
+            //app.UseWebSockets();
+            app.UseSignalR();
 
             app.UseExceptionHandler(
               builder =>

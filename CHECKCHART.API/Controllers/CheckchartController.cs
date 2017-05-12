@@ -6,16 +6,21 @@ using Microsoft.AspNetCore.Mvc;
 using CHECKCHART.API.Models;
 using CHECKCHART.API.ViewModels;
 using CHECKCHART.API.Abstract;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.SignalR.Infrastructure;
+using CHECKCHART.API.Hubs;
 
 namespace CHECKCHART.API.Controllers
 {
     [Route("api/[controller]")]
     public class CheckchartController : Controller
     {
+        private readonly IHubContext _hubContext;
         private ICheckchartRepository _items { get; set; }
-        public CheckchartController(ICheckchartRepository iCheckchartRepository)
+        public CheckchartController(ICheckchartRepository iCheckchartRepository, IConnectionManager connectionManager)
         {
             _items = iCheckchartRepository;
+            _hubContext = connectionManager.GetHubContext<Broadcaster>();
         }
 
         [HttpGet]
@@ -176,6 +181,9 @@ namespace CHECKCHART.API.Controllers
 
                 _items.Commit();
             }
+
+            _hubContext.Clients.All.AnAdded(item);
+
             return new NoContentResult();
         }
 
@@ -203,6 +211,8 @@ namespace CHECKCHART.API.Controllers
 
                 _items.Commit();
             }
+
+            _hubContext.Clients.All.AnUpdated(item);
 
             return new NoContentResult();
         }
@@ -237,6 +247,8 @@ namespace CHECKCHART.API.Controllers
             }
 
             _items.Commit();
+
+            _hubContext.Clients.All.AnDeleted(item);
 
             return new NoContentResult();
         }
